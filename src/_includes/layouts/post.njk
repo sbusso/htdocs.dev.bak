@@ -5,9 +5,14 @@ eleventyNavigation:
   key: post
   order: 2
 ---
-{% include "../components/navigation.njk" %}
-<div class="container mx-auto pt-10 px-20">
-  <h1 class="text-3xl">{{ title }}</h1>
 
-  {{ content | safe}}
+<div class="container px-40">
+  {% include "../components/navigation.njk" %}
+  <div class="container pt-10 mx-auto leading-6">
+    <h1 class="text-3xl font-extralight ">{{ title }}</h1>
+
+    {{ content | safe}}
+    <hr class="mt-10">
+    {% footnotes %}
+  </div>
 </div>

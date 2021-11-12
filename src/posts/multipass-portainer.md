@@ -5,17 +5,21 @@ description: Using Multipass with Portainer on Mac and Windows
 date: 2021-11-12
 tags: ['posts', 'portainer', 'multipass', 'docker']
 ---
+## Install Multipass
 
-Install multipass: [https://multipass.run/](https://multipass.run/)
+{% footnoteref "Multipass" "Download multipass: <a href='https://multipass.run/'>(https://multipass.run/)</a>" %}Multipass{% endfootnoteref %} is a CLI to launch and manage VMs on Windows, Mac and Linux that simulates a cloud environment with support for cloud-init.
+## Create a Virtual Machine
 
+Then we will create a new virtual machine with Portainer.
 
 ```shell
 multipass launch --name ubuntu-docker --cloud-init docker.yaml
 ```
 
+Here is the full description of the cloud-init file:
 
 ```yaml
-#cloud-config
+#cloud-config.yaml
 ---
 users:
   - name: ubuntu
@@ -39,6 +43,8 @@ runcmd:
   - sudo usermod -aG docker ubuntu
   - docker volume create portainer_data
   - docker network create portainer
-  - docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --net portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+  - docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --net portainer\
+    --restart=always -v /var/run/docker.sock:/var/run/docker.sock\
+    -v portainer_data:/data portainer/portainer-ce
 ```
 

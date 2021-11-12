@@ -2,4 +2,53 @@
 
 @tailwind components;
 
+h1 {
+  @apply mb-4 text-2xl
+}
+
+h2 {
+  @apply mb-3 text-xl pt-3
+}
+
+p {
+  @apply mt-4 mb-4
+}
+
+pre[class*="language-"] {
+  @apply    mt-2 mb-8 mx-2 text-sm;
+  font-family: 'Source Code Pro' , monospace;
+  
+}
+
+
+.footnotes {
+  @apply font-mono text-sm mb-4 leading-7
+}
+
+p a,.footnotes a {
+  @apply    text-blue-700;
+}
+
+p a:hover, .footnotes a:hover {
+  @apply    text-blue-500 underline;
+
+}
+
+.footnotes ol {
+  @apply    list-decimal pl-7 ;
+}
+
+
+.footnotes__ref[role='doc-noteref']::after {
+  content: '[' counter(footnotes) ']';
+  counter-increment: footnotes;
+  vertical-align: super;
+  font-size: 0.6em;
+  margin-left: 2px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
 @tailwind utilities;

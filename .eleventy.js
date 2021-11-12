@@ -2,10 +2,14 @@ const fs = require("fs");
 const htmlmin = require("html-minifier");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const footnotes = require("eleventy-plugin-footnotes");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(footnotes, {
+    baseClass: "footnotes",
+  });
 
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);

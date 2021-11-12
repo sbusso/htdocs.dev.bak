@@ -1,7 +1,7 @@
 {% set postsList = collections.posts | reverse %}
-<ul>
+<ul class="flex flex-wrap mb-4">
     {% for post in postsList %}
-        <li class="mt-5">
+        <li class="mt-8 w-1/2">
             <strong>
                 <a href="{{ post.url | url }}">{{ post.data.title }}</a>
             </strong>

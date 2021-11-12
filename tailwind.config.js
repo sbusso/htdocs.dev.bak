@@ -10,6 +10,9 @@ module.exports = {
         "shade-yellow": "#FFFFF3",
         "main-dark": "#333333",
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   variants: {

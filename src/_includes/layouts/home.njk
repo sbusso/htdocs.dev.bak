@@ -3,44 +3,23 @@ title: Home
 layout: layouts/base.njk
 ---
 <main
-  class="
-    container
-    flex flex-col flex-wrap
-    items-center
-    px-20
-    pt-24
-    mx-auto
-    md:pt-48 md:flex-row
-  "
+  class="container flex flex-wrap items-center px-20 pt-24 mx-auto md:pt-48"
 >
   <header
-    class="
-      flex flex-col
-      justify-center
-      w-full
-      overflow-y-hidden
-      xl:w-2/5
-      lg:items-start
-    "
+    class="flex flex-col justify-center w-full overflow-y-hidden lg:items-start"
   >
     <h1
-      class="
-        my-4
-        text-3xl
-        font-bold
-        leading-tight
-        text-center text-blue-500
-        antialiased
-        md:text-5xl md:text-left
-      "
+      class="my-4 text-3xl font-bold leading-tight text-center text-blue-600 font-poppins md:text-5xl md:text-left"
     >
       {{ metadata.title }}
     </h1>
     <p
       class="mb-6 text-base leading-normal text-center md:text-2xl md:text-left"
     >
-      {{ metadata.description }}
+      <span class="bg-yellow-200">{{ metadata.description }}</span>
+
       {% include "components/postslist.njk" %}
+
     </p>
   </header>
 </main>
