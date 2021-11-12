@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   purge: ["./src/_includes/**/*.njk", "./src/*.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -6,7 +7,7 @@ module.exports = {
       colors: {
         "main-blue": "#0080E5",
         "secondary-yellow": "#f9d835",
-        "shade-yellow": "#FFF5DD",
+        "shade-yellow": "#FFFFF3",
         "main-dark": "#333333",
       },
     },

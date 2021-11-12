@@ -1,11 +1,10 @@
 ---
-layout: layouts/base
-title: Multipass with Portainer
-description: How to replace Docker Desktop with Portainer
+layout: layouts/post
+title: How to replace Docker Desktop with Portainer
+description: Using Multipass with Portainer on Mac and Windows
 date: 2021-11-12
 tags: ['posts', 'portainer', 'multipass', 'docker']
 ---
-
 
 Install multipass: [https://multipass.run/](https://multipass.run/)
 

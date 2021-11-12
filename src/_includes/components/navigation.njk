@@ -1,5 +1,6 @@
-<nav class="flex items-center justify-between flex-wrap px-5 py-3 border-b">
-    <a href="/" class="font-semibold text-xl tracking-tight bg-yellow-200">sbusso's blog</a>
+<nav class="flex container mx-auto items-center justify-between flex-wrap px-20 py-3 border-b">
+
+    <a href="/" class="font-semibold text-xl antialiased tracking-tight bg-yellow-200">sbusso's blog</a>
 
     {% set navPages = collections.all | eleventyNavigation %}
     <ul>
@@ -15,4 +16,5 @@
             </li>
         {% endfor %}
     </ul>
+
 </nav>

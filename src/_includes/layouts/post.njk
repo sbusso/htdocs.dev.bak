@@ -1,8 +1,13 @@
 ---
 title: Blog
 layout: layouts/base.njk
-permalink: /posts/
 eleventyNavigation:
   key: post
   order: 2
 ---
+{% include "../components/navigation.njk" %}
+<div class="container mx-auto pt-10 px-20">
+  <h1 class="text-3xl">{{ title }}</h1>
+
+  {{ content | safe}}
+</div>
