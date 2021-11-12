@@ -18,7 +18,7 @@ multipass launch --name ubuntu-docker --cloud-init docker.yaml
 
 Here is the full description of the cloud-init file:
 
-```yaml
+```yaml/*
 #cloud-config.yaml
 ---
 users:

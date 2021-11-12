@@ -6,7 +6,9 @@ const footnotes = require("eleventy-plugin-footnotes");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    alwaysWrapLineHighlights: false,
+  });
   eleventyConfig.addPlugin(footnotes, {
     baseClass: "footnotes",
   });
