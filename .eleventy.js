@@ -13,6 +13,7 @@ module.exports = function (eleventyConfig) {
     baseClass: "footnotes",
   });
 
+  eleventyConfig.addPassthroughCopy("CNAME");
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);
   } else {
