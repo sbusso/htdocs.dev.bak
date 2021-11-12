@@ -36,16 +36,16 @@ module.exports = function (eleventyConfig) {
     }).toFormat("dd-MM-yy");
   });
 
-  var pathPrefix = "";
-  if (process.env.GITHUB_REPOSITORY) {
-    pathPrefix = process.env.GITHUB_REPOSITORY.split("/")[1];
-  }
+  //   var pathPrefix = "";
+  //   if (process.env.GITHUB_REPOSITORY) {
+  //     pathPrefix = process.env.GITHUB_REPOSITORY.split("/")[1];
+  //   }
 
   return {
     dir: {
       input: "src",
     },
-    pathPrefix,
+    // pathPrefix,
   };
 };
 
