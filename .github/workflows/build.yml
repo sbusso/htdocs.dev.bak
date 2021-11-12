@@ -15,18 +15,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "16"
 
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: ~/.cache/yarn
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: npm ci
-      - run: npm run build
+      - run: yarn --frozen-lockfile
+      - run: yarn run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
