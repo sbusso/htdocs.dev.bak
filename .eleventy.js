@@ -1,12 +1,18 @@
 const fs = require("fs");
 const htmlmin = require("html-minifier");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);
   } else {
-    eleventyConfig.setBrowserSyncConfig({ callbacks: { ready: browserSyncReady }});
+    eleventyConfig.setBrowserSyncConfig({
+      callbacks: { ready: browserSyncReady },
+    });
   }
 
   // Passthrough
@@ -15,22 +21,37 @@ module.exports = function(eleventyConfig) {
   // Watch targets
   eleventyConfig.addWatchTarget("./src/styles/");
 
+  const { DateTime } = require("luxon");
+
+  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {
+      zone: "utc",
+    }).toFormat("yy-MM-dd");
+  });
+
+  eleventyConfig.addFilter("readableDate", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {
+      zone: "utc",
+    }).toFormat("dd-MM-yy");
+  });
+
   var pathPrefix = "";
   if (process.env.GITHUB_REPOSITORY) {
-    pathPrefix = process.env.GITHUB_REPOSITORY.split('/')[1];
+    pathPrefix = process.env.GITHUB_REPOSITORY.split("/")[1];
   }
 
   return {
     dir: {
-      input: "src"
+      input: "src",
     },
-    pathPrefix
-  }
+    pathPrefix,
+  };
 };
 
 function browserSyncReady(err, bs) {
   bs.addMiddleware("*", (req, res) => {
-    const content_404 = fs.readFileSync('_site/404.html');
+    const content_404 = fs.readFileSync("_site/404.html");
     // Provides the 404 content without redirect.
     res.write(content_404);
     // Add 404 http status code in request header.
@@ -41,11 +62,11 @@ function browserSyncReady(err, bs) {
 }
 
 function htmlminTransform(content, outputPath) {
-  if( outputPath.endsWith(".html") ) {
+  if (outputPath.endsWith(".html")) {
     let minified = htmlmin.minify(content, {
       useShortDoctype: true,
       removeComments: true,
-      collapseWhitespace: true
+      collapseWhitespace: true,
     });
     return minified;
   }

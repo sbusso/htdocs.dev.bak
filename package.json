@@ -1,8 +1,13 @@
 {
-  "name": "windty",
+  "name": "blog.sbusso.dev",
   "version": "1.0.0",
-  "description": "Simple 11ty template with tailwind",
+  "description": "Personal Blog",
+  "main": "index.html",
+  "repository": "blog.sbusso.dev",
+  "author": "Stephane Busso <stephane.busso@gmail.com>",
+  "license": "MIT",
   "scripts": {
+    "dev": "npx @11ty/eleventy --serve",
     "start": "run-p start:*",
     "start:eleventy": "eleventy --serve",
     "start:postcss": "postcss src/styles/*.css --dir _site --watch",
@@ -11,23 +16,15 @@
     "build:postcss": "cross-env NODE_ENV=production postcss src/styles/*.css --dir _site",
     "clean": "rimraf _site"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/distantcam/windty.git"
-  },
   "keywords": [
     "eleventy",
     "11ty",
     "tailwind"
   ],
-  "author": "Cam MacFarland",
-  "license": "Unlicense",
-  "homepage": "https://github.com/distantcam/windty#readme",
-  "bugs": {
-    "url": "https://github.com/distantcam/windty/issues"
-  },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-navigation": "^0.3.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.3",
     "autoprefixer": "^10.4.0",
     "cross-env": "^7.0.3",
     "cssnano": "^5.0.9",
