@@ -1,4 +1,14 @@
 {
   "title": "htdocs.dev",
-  "description": "A basic personal blog about technologies."
+  "description": "Personal notes on cloud technologies.",
+  "navigation": [
+    {
+      "title": "Posts",
+      "url": "/posts"
+    },
+    {
+      "title": "About",
+      "url": "/about"
+    }
+  ]
 }

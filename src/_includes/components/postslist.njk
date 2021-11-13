@@ -1,14 +1,13 @@
-{% set postsList = collections.posts | reverse %}
-<ul class="flex flex-wrap mb-4">
+{% set postsList = blogPosts %}
+<ul class="grid gap-12 mt-8 mb-4 md:grid-cols-2 sm:grid-cols-1">
     {% for post in postsList %}
-        <li class="mt-8 w-1/2">
-            <strong>
-                <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-            </strong>
-      -
-      <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+        <li class="p-5 border border-b-4 border-r-4 border-gray-700 border-solid border-1 border-t-1 border-l-1 bg-gray-50 group hover:bg-white">
+            <a class="text-3xl font-bold" href="{{ post.url | url }}">{{ post.data.title }}</a>
+
             <br>
             <span>{{ post.data.description }}</span>
+            <br>
+            <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
         </li>
     {% endfor %}
 </ul>

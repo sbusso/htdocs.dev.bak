@@ -47,9 +47,12 @@
         </script>
     </head>
 
-    <body class="container mx-auto font-sans subpixel-antialiased leading-normal tracking-normal text-gray-900 ">
-
-        {{ content | safe }}
-
-    </body>
-</html>
+    <body class="font-sans subpixel-antialiased leading-normal tracking-normal text-gray-900 ">
+        <div class="container mx-auto ">
+            {{ content | safe }}
+        </div>
+        <div class="fixed bottom-0 right-0 p-0.5 text-sm text-gray-400 border-2 border-gray-200 border-solid rounded footer">
+            <a class="hover:text-blue-400" href="#">11ty</a>, 
+        <a class="hover:text-blue-400" href="#">tailwind</a>
+        </body>
+    </html>
