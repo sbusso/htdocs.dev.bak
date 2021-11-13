@@ -8,6 +8,7 @@ tags: ['posts', 'portainer', 'multipass', 'docker']
 ## Install Multipass
 
 {% footnoteref "Multipass" "Download multipass: <a href='https://multipass.run/'>(https://multipass.run/)</a>" %}Multipass{% endfootnoteref %} is a CLI to launch and manage VMs on Windows, Mac and Linux that simulates a cloud environment with support for cloud-init.
+
 ## Create a Virtual Machine
 
 Then we will create a new virtual machine with Portainer.
@@ -19,7 +20,7 @@ multipass launch --name ubuntu-docker --cloud-init docker.yaml
 Here is the full description of the cloud-init file:
 
 ```yaml/*
-#cloud-config.yaml
+# cloud-config.yaml
 ---
 users:
   - name: ubuntu
