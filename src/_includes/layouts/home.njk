@@ -1,35 +1,32 @@
 ---
 title: Home
-layout: layouts/base.njk
+layout: layouts/base
 pagination:
   data: collections.posts
   size: 4
   alias: blogPosts
   reverse: true
 ---
-<main
-  class="container flex flex-wrap items-center px-20 pt-12 mx-auto md:pt-24"
->
-  <header
+
+<header
     class="flex flex-col justify-center w-full overflow-y-hidden lg:items-start"
   >
-    <h1
+  <h1
       class="my-4 text-3xl font-bold leading-tight text-center text-blue-600 font-poppins md:text-5xl md:text-left"
     >
-      {{ metadata.title }}
+      Latest
     </h1>
-    <p
+  <p
       class="mt-0 mb-5 text-base leading-normal text-center md:text-2xl md:text-left"
     >
-      <span class="bg-yellow-200">{{ metadata.description }}</span>
+    <span class="bg-yellow-200">{{ metadata.description }}</span>
 
-      {% include "components/postslist.njk" %}
-      {% if pagination.href.previous %}
-        <a class="p-1 px-4 border border-b-4 border-r-4 border-gray-900 border-solid rounded-full mt-7 bg-gray-50 hover:bg-white" href="{{ pagination.href.previous }}">&laquo; Previous </a>
-      {% endif %}
-      {% if pagination.href.next %}
-        <a class="p-1 px-4 border border-b-4 border-r-4 border-gray-900 border-solid rounded-full mt-7 bg-gray-50 hover:bg-white" href="{{ pagination.href.next }}">Next &raquo;</a>
-      {% endif %}
-    </p>
-  </header>
-</main>
+    {% include "components/postslist.njk" %}
+    {% if pagination.href.previous %}
+      <a class="p-1 px-4 border border-b-4 border-r-4 border-gray-900 border-solid rounded-full mt-7 bg-gray-50 hover:bg-white" href="{{ pagination.href.previous }}">&laquo; Previous </a>
+    {% endif %}
+    {% if pagination.href.next %}
+      <a class="p-1 px-4 border border-b-4 border-r-4 border-gray-900 border-solid rounded-full mt-7 bg-gray-50 hover:bg-white" href="{{ pagination.href.next }}">Next &raquo;</a>
+    {% endif %}
+  </p>
+</header>

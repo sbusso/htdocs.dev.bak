@@ -6,13 +6,8 @@ eleventyNavigation:
   order: 2
 ---
 
-<div class="container px-40">
-  {% include "../components/navigation.njk" %}
-  <div class="container pt-10 mx-auto leading-6">
-    <h1 class="text-3xl font-extralight ">{{ title }}</h1>
+<h1 class="text-3xl font-extralight ">{{ title }}</h1>
+{{ content | safe}}
+<hr class="mt-10">
 
-    {{ content | safe}}
-    <hr class="mt-10">
-    {% footnotes %}
-  </div>
-</div>
+{% footnotes %}
