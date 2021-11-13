@@ -2,6 +2,37 @@
 
 @tailwind components;
 
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@layer utilities {
+  .list-interpunct > li:before {
+    content: '・';
+    float: left;
+    margin: 0 0 0 -0.9em;
+    width: 0.9em;
+  }
+
+  @media (min-width: 992px) {
+   .list-interpunct > li:before {
+      margin: 0 0 0 -1.5em;
+      width: 1.5em;
+    }
+  }
+}
+
+/* ul { @apply list-disc } */
+
+
 h1 {
   @apply mb-4 text-2xl
 }
