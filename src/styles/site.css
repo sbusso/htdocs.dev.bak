@@ -32,6 +32,9 @@
 
 /* ul { @apply list-disc } */
 
+.anchor hidden {
+  display: block;
+}
 
 h1 {
   @apply mb-4 text-2xl
