@@ -11,6 +11,7 @@ module.exports = {
         "main-dark": "#333333",
       },
       fontFamily: {
+        pt: ["PT Serif", "serif"],
         poppins: ["Poppins", "sans-serif"],
       },
     },
