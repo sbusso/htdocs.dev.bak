@@ -1,0 +1,30 @@
+<div class="heading-wrapper h2"><h2 id="31-install-dk-filter-milter-package">3.1. Install dk-filter milter package</h2><a class="anchor" href="#31-install-dk-filter-milter-package" aria-labelledby="31-install-dk-filter-milter-package"><span hidden>#</span></a></div><pre><code>apt-get install dk-filter
+</code></pre><div class="heading-wrapper h2"><h2 id="32-configuration">3.2. Configuration</h2><a class="anchor" href="#32-configuration" aria-labelledby="32-configuration"><span hidden>#</span></a></div><p>Copy paste the following into a text file and save as a bash script. You can change the variables “DOMAIN” and “SELECTOR” to the one you choose depending upon the requirement.</p><pre><code>DOMAIN=&quot;pronostic-facile.fr&quot;
+SELECTOR=&quot;mail&quot;
+
+mkdir -p /etc/domainkeys/${DOMAIN}/
+cd /etc/domainkeys/${DOMAIN}/
+openssl genrsa -out private.key 1024
+openssl rsa -in private.key -out public.key -pubout -outform PEM
+
+cat &gt; /etc/domainkeys/trustlist.txt &lt;&lt; EOF
+${DOMAIN}
+`hostname`
+`ifconfig |grep &quot;inet addr:&quot;|awk '{print $2}'|cut -d: -f2|uniq`
+EOF
+
+cat &gt;  /etc/default/dk-filter &lt;&lt; EOF
+DAEMON_OPTS=&quot;-l&quot;
+DAEMON_OPTS=&quot;$DAEMON_OPTS -d ${DOMAIN} -s /etc/domainkeys/${DOMAIN}/private.key -S ${SELECTOR} -i /etc/domainkeys/trustlist.txt&quot;
+SOCKET=&quot;inet:8892@localhost&quot;
+EOF
+
+postconf -e smtpd_milters=&quot;inet:localhost:8891,inet:localhost:8892&quot;
+postconf -e non_smtpd_milters=&quot;inet:localhost:8891,inet:localhost:8892&quot;
+
+service dk-filter restart
+service postfix restart
+</code></pre><div class="heading-wrapper h2"><h2 id="33-update-dns">3.3. Update DNS</h2><a class="anchor" href="#33-update-dns" aria-labelledby="33-update-dns"><span hidden>#</span></a></div><p>Publish the following DNS records. The public key is taken from file /etc/domainkeys/pronostic-facile.fr/public.key .</p><pre><code>_domainkey.pronostic-facile.fr. IN TXT &quot;t=y; o=~;
+
+mail._domainkey.pronostic-facile.fr. IN TXT &quot;k=rsa; t=y; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbG2dfmfhS2g5T5bKdzhh9oAxKHEGVJmOXcGT7bcSWsDKxXL6SWNaCl4HzHoPHVnRfjZYyNtehJ19FAupSlGme7wJNqQI6GTXAvApUYEbjKbffLfGresB6quuy//xjbK2H7J01apdvYHzDdmenwGVmufPoK4ASokm35plkXfXGVwIDAQAB&quot;
+</code></pre><p>Ref: <a href="https://help.ubuntu.com/community/Postfix/DomainKeys">DomainKeys on Ubuntu</a></p>

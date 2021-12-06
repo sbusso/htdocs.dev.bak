@@ -1,0 +1,52 @@
+<div class="heading-wrapper h2"><h2 id="21-install-dkim-related-packages">2.1. Install dkim related packages</h2><a class="anchor" href="#21-install-dkim-related-packages" aria-labelledby="21-install-dkim-related-packages"><span hidden>#</span></a></div><pre><code>apt-get install opendkim opendkim-tools
+</code></pre><div class="heading-wrapper h2"><h2 id="22-configure-dkim">2.2. Configure DKIM</h2><a class="anchor" href="#22-configure-dkim" aria-labelledby="22-configure-dkim"><span hidden>#</span></a></div><p>Copy paste the following into a text file and save as a bash script. You can change the variables “DOMAIN” and “SELECTOR” to the one you choose depending upon the requirement.</p><pre><code>DOMAIN=&quot;pronostic-facile.fr&quot;
+SELECTOR=&quot;default&quot;
+
+mkdir -p /etc/opendkim/keys/${DOMAIN}
+opendkim-genkey -D /etc/opendkim/keys/${DOMAIN}/ -d ${DOMAIN} -s ${SELECTOR}
+chown -R opendkim:opendkim /etc/opendkim/keys/${DOMAIN}
+
+cat &gt; /etc/opendkim/dkim-InternalHosts.txt &lt;&lt; EOF
+${DOMAIN}
+`hostname`
+`ifconfig |grep &quot;inet addr:&quot;|awk '{print $2}'|cut -d: -f2|uniq`
+EOF
+
+cat &gt; /etc/opendkim.conf &lt;&lt; EOF
+PidFile                 /var/run/opendkim/opendkim.pid
+Syslog                  yes
+Domain                  ${DOMAIN}
+KeyFile                 /etc/opendkim/keys/${DOMAIN}/${SELECTOR}.private
+Selector                ${SELECTOR}
+SyslogSuccess           yes
+LogWhy                  yes
+UserID                  opendkim:opendkim
+Umask                   002
+Canonicalization        relaxed/simple
+AutoRestart             yes
+Background              yes
+DNSTimeout              10
+Mode                    sv
+SignatureAlgorithm      rsa-sha256
+SubDomains              no
+X-Header                no
+Statistics              /var/log/dkim-filter/dkim-stats
+InternalHosts          /etc/opendkim/dkim-InternalHosts.txt
+EOF
+
+cat &gt; /etc/default/opendkim &lt;&lt; EOF
+SOCKET=&quot;inet:8891@localhost&quot;
+EOF
+
+postconf -e smtpd_milters=&quot;inet:localhost:8891&quot;
+postconf -e non_smtpd_milters=&quot;inet:localhost:8891&quot;
+
+service opendkim restart
+service postfix restart
+</code></pre><div class="heading-wrapper h2"><h2 id="23-update-dns">2.3. Update DNS</h2><a class="anchor" href="#23-update-dns" aria-labelledby="23-update-dns"><span hidden>#</span></a></div><p>Add server ip’s 144.76.113.170 &amp; 144.76.113.185 to spf record of domain. SPF and TXT records:</p><pre><code>&quot;v=spf1 A include:aspmx.googlemail.com +ip4:5.9.20.211  ip4:144.76.113.170 ip4:144.76.113.185 include:_spf.google.com include:spf.mailjet.com include:helpscoutemail.com include:mailgun.org ~all&quot;
+</code></pre><p>Publish the contents of file /etc/opendkim/keys/pronostic-facile.fr/default.txt as a TXT record in the dns of domain.</p><pre><code>root@Ubuntu-1204-precise-64-minimal ~ # cat /etc/opendkim/keys/pronostic-facile.fr/default.txt
+
+default._domainkey IN TXT &quot;v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQU...yxVM1VK9Ex+GBgO4QIDAQAB&quot; ; ----- DKIM key default for pronostic-facile.fr
+
+root@Ubuntu-1204-precise-64-minimal ~ #
+</code></pre><p>Ref: https://help.ubuntu.com/community/Postfix/DKIM http://askubuntu.com/questions/134725/setup-dkim-domainkeys-for-ubuntu-postfix-and-mailman</p>

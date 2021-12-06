@@ -1,0 +1,31 @@
+<div class="heading-wrapper h2"><h2 id="11-install-postfix-and-opendkim">1.1. Install postfix and opendkim</h2><a class="anchor" href="#11-install-postfix-and-opendkim" aria-labelledby="11-install-postfix-and-opendkim"><span hidden>#</span></a></div><p>apt-get install postfix opendkim -y</p><div class="heading-wrapper h2"><h2 id="12-modify-postfix-configuration">1.2. Modify postfix configuration</h2><a class="anchor" href="#12-modify-postfix-configuration" aria-labelledby="12-modify-postfix-configuration"><span hidden>#</span></a></div><p>hint: don’t set ‘mydestination=pronostic-facile.fr’ else any bounce or postmaster will be delivred localy</p><pre><code>postconf -e mydomain=pronostic-facile.fr
+postconf -e inet_protocols=ipv4
+postconf -e myhostname=pronostic-facile.fr
+postconf -e smtpd_sasl_local_domain=pronostic-facile.fr
+postconf -e smtpd_sasl_auth_enable=yes
+postconf -e smtpd_sasl_tls_security_options=&quot;noanonymous, noplaintext&quot;
+postconf -e broken_sasl_auth_clients=yes
+postconf -e smtpd_recipient_restrictions=&quot;permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination&quot;
+postconf -e milter_default_action=accept
+postconf -e milter_protocol=2
+smtp_helo_name = pronostic-facile.fr
+default_destination_concurrency_limit = 20
+address_verify_map = memcache:/etc/postfix/verify-memcache.cf
+address_verify_cache_cleanup_interval = 0
+</code></pre><p><code>myhostname</code>: This is the hostname of your machine. But don't put the full hostname. If your machine hostname is mail.mydomain.com you will only use mydomain. <code>mydestination</code>: This parameter specifies what destinations this machine will deliver locally. The default is:</p><p>mydestination = $myhostname localhost.$mydomain localhost</p><div class="heading-wrapper h2"><h2 id="13-submission-port-587-configuration">1.3. Submission (port: 587) configuration</h2><a class="anchor" href="#13-submission-port-587-configuration" aria-labelledby="13-submission-port-587-configuration"><span hidden>#</span></a></div><pre><code>submission inet n – n – – smtpd
+-o smtpd_tls_security_level=encrypt
+-o smtpd_sasl_auth_enable=yes
+
+smtp       inet n       -       n       -       -       smtpd -v
+submission inet n       -       n       -       -       smtpd
+        -o smtpd_etrn_restrictions=reject
+        -o smtpd_sasl_type=dovecot
+        -o smtpd_sasl_path=private/auth
+        -o smtpd_sasl_auth_enable=yes
+        -o smtpd_reject_unlisted_sender=yes
+        -o smtpd_recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject
+</code></pre><div class="heading-wrapper h2"><h2 id="14-restart-postfix">1.4. Restart postfix</h2><a class="anchor" href="#14-restart-postfix" aria-labelledby="14-restart-postfix"><span hidden>#</span></a></div><pre><code>service postfix restart
+</code></pre><div class="heading-wrapper h2"><h2 id="15-keep-on-time">1.5. Keep on time</h2><a class="anchor" href="#15-keep-on-time" aria-labelledby="15-keep-on-time"><span hidden>#</span></a></div><p>Add ntp time-date (very important to maintain the date-time stamp when dealing with emails)</p><pre><code>ntpdate ntp.pool.org
+service ntpd start
+chkconfig ntpd on
+</code></pre>

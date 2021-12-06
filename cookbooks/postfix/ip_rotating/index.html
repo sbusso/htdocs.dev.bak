@@ -1,0 +1,16 @@
+<div class="heading-wrapper h2"><h2 id="71-iptable">7.1. IPTable</h2><a class="anchor" href="#71-iptable" aria-labelledby="71-iptable"><span hidden>#</span></a></div><p>Add the following iptable rules for ip rotation</p><pre><code>iptables -t nat -I POSTROUTING -m state --state NEW -p tcp --dport 25 -o eth0 -m statistic --mode nth --every 2 --packet 1 -j SNAT --to-source 144.76.113.170
+
+iptables -t nat -I POSTROUTING -m state --state NEW -p tcp --dport 25 -o eth0 -m statistic --mode nth --every 2 --packet 1 -j SNAT --to-source 144.76.113.185
+</code></pre><div class="heading-wrapper h2"><h2 id="72-take-backup-of-current-iptable-rules">7.2. Take backup of current iptable rules</h2><a class="anchor" href="#72-take-backup-of-current-iptable-rules" aria-labelledby="72-take-backup-of-current-iptable-rules"><span hidden>#</span></a></div><pre><code>iptables-save &gt; /etc/network/iptablerules.txt
+</code></pre><div class="heading-wrapper h2"><h2 id="73-add-the-following-line-in-network-service-configuration-fileie-etcnetworkinterfaces">7.3. Add the following line in network service configuration file(ie, /etc/network/interfaces ),</h2><a class="anchor" href="#73-add-the-following-line-in-network-service-configuration-fileie-etcnetworkinterfaces" aria-labelledby="73-add-the-following-line-in-network-service-configuration-fileie-etcnetworkinterfaces"><span hidden>#</span></a></div><pre><code>post-up iptables-restore &lt; /etc/network/iptablerules.txt
+</code></pre><p>eg:</p><pre><code>auto  eth0
+iface eth0 inet static
+  address   144.76.113.170
+  broadcast 144.76.113.191
+  netmask   255.255.255.224
+  gateway   144.76.113.161
+
+  post-up iptables-restore &lt; /etc/network/iptablerules.txt
+
+# default route to access subnet
+</code></pre><p>up route add -net 144.76.113.160 netmask 255.255.255.224 gw 144.76.113.161 eth0</p><p><code>smtp_bind_address</code> directive to use multiple IPs and ip rotation can be achieved with route balancing.</p>

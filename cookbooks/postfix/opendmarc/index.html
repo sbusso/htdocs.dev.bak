@@ -1,0 +1,33 @@
+<div class="heading-wrapper h2"><h2 id="41-install-opendmarc-package">4.1. Install opendmarc package</h2><a class="anchor" href="#41-install-opendmarc-package" aria-labelledby="41-install-opendmarc-package"><span hidden>#</span></a></div><pre><code>apt-get install opendmarc
+</code></pre><div class="heading-wrapper h2"><h2 id="42-configuration">4.2. Configuration</h2><a class="anchor" href="#42-configuration" aria-labelledby="42-configuration"><span hidden>#</span></a></div><p>Copy paste the following into a text file and save as a bash script. You can change the variable “DOMAIN” to the one you choose depending upon the requirement.</p><pre><code>DOMAIN=&quot;pronostic-facile.fr&quot;
+mkdir /usr/local/etc/opendmarc/
+
+cat &gt; /usr/local/etc/opendmarc/ignore.hosts &lt;&lt; EOF
+${DOMAIN}
+`hostname`
+`ifconfig |grep &quot;inet addr:&quot;|awk '{print $2}'|cut -d: -f2|uniq`
+EOF
+
+
+cat &gt; /etc/opendmarc.conf &lt;&lt; EOF
+AuthservID HOSTNAME
+Background true
+BaseDirectory /var/run/opendmarc
+CopyFailuresTo postmaster@${DOMAIN}
+IgnoreHosts /usr/local/etc/opendmarc/ignore.hosts
+PidFile /var/run/opendmarc/opendmarc.pid
+Socket inet:8893@localhost
+Syslog false
+SyslogFacility mail
+TemporaryDirectory /var/tmp
+TrustedAuthservIDs HOSTNAME
+UserID opendmarc
+EOF
+
+postconf -e smtpd_milters=&quot;inet:localhost:8891,inet:localhost:8892,inet:localhost:8893&quot;
+postconf -e non_smtpd_milters=&quot;inet:localhost:8891,inet:localhost:8892,inet:localhost:8893&quot;
+
+service opendmarc restart
+service postfix restart
+</code></pre><div class="heading-wrapper h2"><h2 id="43-update-dns">4.3. Update DNS</h2><a class="anchor" href="#43-update-dns" aria-labelledby="43-update-dns"><span hidden>#</span></a></div><p>Publish the corresponding dns record,</p><pre><code>_dmarc.pronostic-facile.fr. IN TXT &quot;v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@pronostic-facile.fr&quot;
+</code></pre>
