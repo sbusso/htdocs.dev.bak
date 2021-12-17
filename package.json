@@ -36,7 +36,7 @@
     "postcss-cli": "^9.0.2",
     "postcss-nested": "^5.0.6",
     "rimraf": "^3.0.2",
-    "slugify": "^1.6.2",
+    "slugify": "^1.6.4",
     "tailwindcss": "^2.2.19"
   }
 }
