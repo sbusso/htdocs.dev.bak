@@ -5,9 +5,15 @@ eleventyNavigation:
   parent: posts
   order: 2
 ---
+<article class="md:prose-lg lg:prose-xl">
+
 
 <h1 class="font-sans text-3xl font-extralight">{{ title }}</h1>
+<div class="text-gray-400 font-italic -mt-6 mb-10">
+{{ page.date | readableDate }}
+</div>
 {{ content | safe}}
 <hr class="mt-10">
 
 {% footnotes %}
+</article>

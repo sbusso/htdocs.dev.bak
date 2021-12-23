@@ -5,7 +5,6 @@ description: Create a simple page using Petite VUe and Tailwind CSS
 date: 2021-11-20
 tags: ['posts', 'tailwind', 'view', 'template']
 ---
-# Building a Tailwind CSS starter template with Petite Vue
 
 1. Link to tailwind and daisyui CDN
 
