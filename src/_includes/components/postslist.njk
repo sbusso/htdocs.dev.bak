@@ -1,17 +1,27 @@
 {% set postsList = blogPosts %}
-<ul class="grid gap-12 mt-8 mb-4 lg:grid-cols-2 md:grid-cols-1">
+<ul class="grid gap-12 mt-8 mb-4 lg:grid-cols-1 md:grid-cols-1 w-full">
     {% for post in postsList %}
-        <li class="p-5 border border-b-4 border-r-4 border-gray-700 border-solid border-1 border-t-1 border-l-1 bg-gray-50 group hover:bg-white">
-            <div class="flex flex-col">
-                <p class="mt-1">
-                    <time class="font-thin " datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-                </p>
+        <a class="group"  href="{{ post.url | url }}">
+            <li class="p-8 border border-b-4 border-r-4 border-gray-500 border-t-1 border-l-1 bg-gray-50 group hover:bg-white">
 
-                <a class="text-3xl font-bold" href="{{ post.url | url }}">{{ post.data.title }}</a>
+                <div class="flex">
+                    <div class="w-full">
+                        <p class="mt-1">
+                            <time class="font-thin " datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                        </p>
 
-                <br>
-                <span class="text-gray-500" >{{ post.data.description }}</span>
+                        <span class="text-3xl font-bold">{{ post.data.title }}</span>
 
-            </li>
+                        <br>
+
+                        <span class="text-gray-500" >{{ post.data.description }}</span>
+                    </div>
+
+                    <div class="shrink-0">
+                        <img class=" w-40 h-40 border rounded grayscale group-hover:grayscale-0" src="{{ post.data.image }}" alt="{{ post.data.title }}">
+                    </div>
+
+                </li>
+            </a>
         {% endfor %}
     </ul>
