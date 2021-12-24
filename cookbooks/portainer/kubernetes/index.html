@@ -1,0 +1,6 @@
+<div class="heading-wrapper h2"><h2 id="installation">Installation</h2><a class="anchor" href="#installation" aria-labelledby="installation"><span hidden>#</span></a></div><ol><li>Digital Ocean cluster, dev mode ($30)</li></ol><pre><code>brew install kubectl
+brew install doctl
+</code></pre><p>doctl</p><ol start="2"><li>Helm</li></ol><pre><code>helm repo add portainer https://portainer.github.io/k8s/
+helm repo update
+</code></pre><p>Cluster:</p><pre><code>doctl kubernetes cluster kubeconfig save 85be81c7-5e23-485b-b1fc-fd9559d61694
+</code></pre><p>kubectl create namespace portainer</p><p>Go to Kubernetes Console &gt; services &gt; Portainer &gt; External Endpoints</p>
