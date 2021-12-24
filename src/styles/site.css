@@ -50,24 +50,31 @@ p {
   @apply mt-4 mb-4;
 }
 
-pre[class*="language-"] {
-  @apply mt-2 mb-6 ml-2 mr-8 text-sm;
-  font-family: "Source Code Pro", monospace;
+code[class*=language-], pre[class*="language-"] {
+  @apply mt-2 mb-6 ml-2 mr-8 text-sm pl-4;
+  font-family: "Fira Code", "Source Code Pro", monospace;
   counter-reset: lineNumber;
+}
+
+
+
+code[class*=language-shell], pre[class*=language-shell] {
+   color: #efefef;
+
 }
 
 code .highlight-line:before {
   -webkit-user-select: none;
-  border-right: 1px solid #dcdcdc;
-  color: #bcbcbc;
   content: counter(lineNumber);
   counter-increment: lineNumber;
   display: inline-block;
+  color: #646984;
   font-variant-numeric: tabular-nums;
   margin-right: 1.2em;
   padding-right: 1.2em;
   text-align: right;
   width: 2.4em;
+  
 }
 
 .copy-code-button {
@@ -110,7 +117,7 @@ code .highlight-line:before {
 }
 
 .footnotes {
-  @apply font-mono text-sm mb-4 leading-7;
+  @apply text-sm mb-4 leading-7;
 }
 
 p a,
