@@ -51,7 +51,7 @@ p {
 }
 
 code[class*=language-], pre[class*="language-"] {
-  @apply mt-2 mb-6 ml-2 mr-8 text-sm pl-4;
+
   font-family: "Fira Code", "Source Code Pro", monospace;
   counter-reset: lineNumber;
 }
