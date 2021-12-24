@@ -8,20 +8,4 @@ pagination:
   reverse: true
 ---
 
-<header
-    class="flex flex-col justify-center w-full overflow-y-hidden lg:items-start"
-  >
-  <h1 class="mt-8 text-4xl mb-14 md:text-5xl md:text-left ">
-    Notes about 
-    <mark class="bg-yellow-200">cloud technologies</mark>
-  </h1>
-
-  {% include "components/postslist.njk" %}
-  {% if pagination.href.previous %}
-    <a class="p-1 px-4 border border-b-4 border-r-4 border-gray-900 border-solid rounded-full mt-7 bg-gray-50 hover:bg-white" href="{{ pagination.href.previous }}">&laquo; Previous </a>
-  {% endif %}
-  {% if pagination.href.next %}
-    <a class="p-1 px-4 border border-b-4 border-r-4 border-gray-900 border-solid rounded-full mt-7 bg-gray-50 hover:bg-white" href="{{ pagination.href.next }}">Next &raquo;</a>
-  {% endif %}
-</p>
-</header>
+{% include "components/postIndex.njk" %}

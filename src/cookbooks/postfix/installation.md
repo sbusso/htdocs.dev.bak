@@ -1,3 +1,8 @@
+---
+title: Installation
+layout: layouts/post
+tags: [cookbooks,postfix]
+---
 ## 1.1. Install postfix and opendkim
 
   apt-get install postfix opendkim -y

@@ -1,0 +1,16 @@
+<header
+    class="flex flex-col justify-center w-full overflow-y-hidden lg:items-start"
+  >
+    <h1 class="mt-8 text-4xl mb-14 md:text-5xl md:text-left ">
+    Notes about 
+    <mark class="bg-yellow-200">cloud technologies</mark>
+    </h1>
+
+    {% include "components/postslist.njk" %}
+    {% if pagination.href.previous %}
+        <a class="p-1 px-4 text-lg underline mt-7" href="{{ pagination.href.previous }}">&laquo; Previous </a>
+    {% endif %}
+    {% if pagination.href.next %}
+        <a class="p-1 px-4 text-lg underline mt-7" href="{{ pagination.href.next }}">Next &raquo;</a>
+    {% endif %}
+</header>

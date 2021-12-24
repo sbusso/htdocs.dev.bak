@@ -4,15 +4,20 @@
   "navigation": [
     {
       "title": "Posts",
-      "url": "/"
+      "url": "/posts"
     },
     {
       "title": "Cookbooks",
       "url": "/cookbooks"
     },
     {
+      "title": "Projects",
+      "url": "/projects"
+    },
+
+    {
       "title": "About",
-      "url": "/about"
+      "url": "/pages/about"
     }
   ]
 }
