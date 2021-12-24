@@ -1,4 +1,7 @@
-# Repositories
+---
+title: Repositories
+layout: layouts/page
+---
 
 ??? summary "Bear Power Pack"
 

@@ -1,5 +1,6 @@
 ---
 title: Cloud Pipeline
+layout: layouts/page
 ---
 
 
