@@ -12,7 +12,6 @@ module.exports = {
       },
       fontFamily: {
         pt: ["PT Serif", "serif"],
-        poppins: ["Poppins", "sans-serif"],
         code: ["Fira Code", "monospace"],
       },
     },
