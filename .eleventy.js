@@ -7,6 +7,10 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 // If not already added from previous tip
 const slugify = require("slugify");
+const {
+  fortawesomeBrandsPlugin,
+} = require("@vidhill/fortawesome-brands-11ty-shortcode");
+const sitemap = require("@quasibit/eleventy-plugin-sitemap");
 
 // const { DateTime } = require("luxon");
 
@@ -18,7 +22,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(footnotes, {
     baseClass: "footnotes",
   });
-
+  eleventyConfig.addPlugin(fortawesomeBrandsPlugin);
   eleventyConfig.addPassthroughCopy("CNAME");
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);
@@ -27,6 +31,11 @@ module.exports = function (eleventyConfig) {
       callbacks: { ready: browserSyncReady },
     });
   }
+  eleventyConfig.addPlugin(sitemap, {
+    sitemap: {
+      hostname: "https://htdocs.dev",
+    },
+  });
 
   // Passthrough
   eleventyConfig.addPassthroughCopy({ "src/static": "." });

@@ -13,11 +13,18 @@
     {
       "title": "Projects",
       "url": "/projects"
-    },
-
+    }
+  ],
+  "social": [
     {
-      "title": "About",
-      "url": "/pages/about"
+      "title": "GitHub",
+      "url": "https://github.com/sbusso",
+      "icon": "github"
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/in/stephanebusso",
+      "icon": "linkedin"
     }
   ]
 }
