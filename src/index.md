@@ -1,5 +1,5 @@
 ---
-title: Latest
+title: HTDocs.dev
 layout: layouts/home
 tags: [homepage]
 ---
