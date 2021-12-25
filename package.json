@@ -1,9 +1,9 @@
 {
-  "name": "blog.sbusso.dev",
+  "name": "htdocs.dev",
   "version": "1.0.0",
   "description": "Personal Blog",
   "main": "index.html",
-  "repository": "blog.sbusso.dev",
+  "repository": "https://github.com/sbusso/htdocs.dev",
   "author": "Stephane Busso <stephane.busso@gmail.com>",
   "license": "MIT",
   "scripts": {
