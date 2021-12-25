@@ -49,6 +49,15 @@ module.exports = function (eleventyConfig) {
     }).toFormat("d LLL yyyy");
   });
 
+  eleventyConfig.addFilter("keys", (obj) => Object.keys(obj));
+  eleventyConfig.addFilter("except", (arr = [], ...values) => {
+    const data = new Set(arr);
+    for (const item of values) {
+      data.delete(item);
+    }
+    return [...data].sort();
+  });
+
   // eleventyConfig.addFilter("postDate", (dateObj) => {
   //   return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   // });
@@ -57,6 +66,17 @@ module.exports = function (eleventyConfig) {
   //   if (process.env.GITHUB_REPOSITORY) {
   //     pathPrefix = process.env.GITHUB_REPOSITORY.split("/")[1];
   //   }
+
+  eleventyConfig.addCollection("tagList", function (collectionApi) {
+    const tagsList = new Set();
+    collectionApi.getAll().map((item) => {
+      if (item.data.tags) {
+        // handle pages that don't have tags
+        item.data.tags.map((tag) => tagsList.add(tag));
+      }
+    });
+    return tagsList;
+  });
 
   const linkAfterHeader = markdownItAnchor.permalink.linkAfterHeader({
     class: "anchor",
