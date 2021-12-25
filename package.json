@@ -13,7 +13,8 @@
     "build": "run-s clean build:eleventy build:postcss",
     "build:eleventy": "cross-env ELEVENTY_PRODUCTION=true eleventy",
     "build:postcss": "cross-env NODE_ENV=production postcss src/styles/*.css --dir _site",
-    "clean": "rimraf _site"
+    "clean": "rimraf _site",
+    "add": "plop"
   },
   "keywords": [
     "eleventy",
@@ -34,6 +35,8 @@
     "html-minifier": "^4.0.0",
     "markdown-it-anchor": "^8.4.1",
     "npm-run-all": "^4.1.5",
+    "plop": "^3.0.5",
+    "plop-helper-date": "^1.0.0",
     "postcss": "^8.3.11",
     "postcss-cli": "^9.0.2",
     "postcss-nested": "^5.0.6",

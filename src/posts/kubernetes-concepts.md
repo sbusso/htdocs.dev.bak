@@ -3,7 +3,7 @@ layout: layouts/post
 title: Kubernetes Concepts
 description: Understanding Kubernetes
 date: 2020-10-27
-image: /images/kubernetes@2x.png
+image: /images/kubernetes@2x.webp
 tags: ['posts', 'kubernetes']
 ---
 

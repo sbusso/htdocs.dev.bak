@@ -3,7 +3,7 @@ layout: layouts/post
 title: Building a Tailwind CSS starter template with Petite Vue
 description: Create a simple page using Petite VUe and Tailwind CSS
 date: 2021-11-20
-image: /images/test@2x.png
+image: /images/test@2x.webp
 tags: ['posts', 'tailwind', 'view', 'template']
 ---
 
