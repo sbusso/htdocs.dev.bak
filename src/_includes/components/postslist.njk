@@ -1,10 +1,10 @@
 {% set postsList = blogPosts %}
 <ul class="grid w-full mt-8 mb-4 gap-14 lg:grid-cols-1 md:grid-cols-1">
     {% for post in postsList %}
-        <a class="group"  href="{{ post.url | url }}">
-            <li class="p-8 border border-b-4 border-r-4 border-gray-500 rounded-lg border-t-1 border-l-1 bg-gray-50 group hover:bg-white">
 
-                <div class="flex">
+        <li class="p-0 border border-b-4 border-r-4 border-gray-500 rounded-lg border-t-1 border-l-1 bg-gray-50 group hover:bg-white">
+            <a class=""  href="{{ post.url | url }}">
+                <div class="flex p-8">
                     <div class="w-full">
                         <p class="mt-1">
                             <time class="font-thin " datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
@@ -20,8 +20,9 @@
                     <div class="shrink-0">
                         <img class="w-40 h-40 border rounded grayscale group-hover:grayscale-0" width="160" height="160"  src="{{ post.data.image }}" alt="{{ post.data.title }}">
                     </div>
-
-                </li>
+                </div>
             </a>
-        {% endfor %}
-    </ul>
+        </li>
+
+    {% endfor %}
+</ul>
