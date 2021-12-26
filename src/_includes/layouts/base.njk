@@ -22,17 +22,17 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | url }}">
         <link rel="manifest" href="{{ '/site.webmanifest' | url }}">
 
-        <title>{{ title or metadata.title }}</title>
+        <title>{{ title or metadata.title }} | HTDocs.dev</title>
         <link href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-duotone-dark.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js" defer></script>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;600&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ '/site.css' | url }}">
         <script src="https://cdn.usefathom.com/script.js" data-site="NBFIFOMN" defer></script>
-        <script>
+        <script async>
             document
                 .querySelectorAll('pre > code')
                 .forEach(function (codeBlock) {
