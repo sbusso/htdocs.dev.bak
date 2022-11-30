@@ -52,17 +52,15 @@ p {
   @apply mt-4 mb-4;
 }
 
-code[class*=language-], pre[class*="language-"] {
-
+code[class*="language-"],
+pre[class*="language-"] {
   font-family: "Fira Code", "Source Code Pro", monospace;
   counter-reset: lineNumber;
 }
 
-
-
-code[class*=language-shell], pre[class*=language-shell] {
-   color: #efefef;
-
+code[class*="language-shell"],
+pre[class*="language-shell"] {
+  color: #efefef;
 }
 
 code .highlight-line:before {
@@ -76,7 +74,6 @@ code .highlight-line:before {
   padding-right: 1.2em;
   text-align: right;
   width: 2.4em;
-  
 }
 
 .copy-code-button {
@@ -147,5 +144,3 @@ p a:hover,
 }
 
 @tailwind utilities;
-
-
